@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      .x .axis text {
+        width: 10px;
+      }
+    </style>
+
+    <script>
+      var dataArray = [2, 13, 15, 20, 24, 12, 17];
+      var dataFruit = [
+        "orange",
+        "apple",
+        "grape afdads adsfdas 23f3f2",
+        "banana",
+        "kiwi",
+        "melon",
+        "peach"
+      ];
+
+      var x = d3
+        .scaleBand()
+        .domain(dataFruit)
+        .range([0, 520]);
+
+      var xAxis = d3.axisBottom(x);
+
+      var svg = d3
+        .select("body")
+        .append("svg")
+        .attr("height", "100vh")
+        .attr("width", "100vw");
+
+      svg
+        .selectAll("rect")
+        .data(dataArray)
+        .enter()
+        .append("rect")
+        .attr("height", function(d, i) {
+          return d * 10;
+        })
+        .attr("width", "70")
+        .attr("fill", "red")
+        .attr("x", function(d, i) {
+          return 80 * i;
+        })
+        .attr("y", function(d, i) {
+          return 350 - d * 10;
+        });
+
+      svg
+        .append("g")
+        .attr("class", "x axis")
+        .call(xAxis)
+        .selectAll(".tick text");
+    </script>
+  </body>
+</html>
